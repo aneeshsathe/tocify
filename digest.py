@@ -1,4 +1,4 @@
-import os, re, json, time, math, hashlib, logging
+import os, re, json, time, math, hashlib, logging, subprocess
 from datetime import datetime, timezone, timedelta
 
 import feedparser
@@ -19,6 +19,7 @@ load_dotenv()
 # ---- config (env-tweakable) ----
 MODEL_NAME = os.getenv("OLLAMA_MODEL", "llama3.2")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+WIKI_PATH = os.path.expanduser(os.getenv("WIKI_PATH", "~/Code/matiswiki/"))
 MAX_ITEMS_PER_FEED = int(os.getenv("MAX_ITEMS_PER_FEED", "50"))
 MAX_TOTAL_ITEMS = int(os.getenv("MAX_TOTAL_ITEMS", "100"))
 LOOKBACK_DAYS = int(os.getenv("LOOKBACK_DAYS", "3"))  # Restored to 3 days
@@ -299,6 +300,7 @@ def render_digest_md(result: dict, items_by_id: dict[str, dict]) -> str:
         "",
     ]
     
+    today_str = datetime.now().strftime('%Y-%m-%d %a')
     org_lines = [f"* Daily Reads ({week_of})"]
     if notes:
         org_lines += [f"  Summary: {notes}"]
@@ -327,7 +329,7 @@ def render_digest_md(result: dict, items_by_id: dict[str, dict]) -> str:
         # Org Mode
         org_lines += [
             f"** TODO [[{r['link']}][{r['title']}]]",
-            f"   SCHEDULED: <{datetime.now().strftime('%Y-%m-%d %a')}>",
+            f"   SCHEDULED: <{today_str}>",
             f"   - Source: {r['source']}",
             f"   - Score: {r['score']:.2f}",
             f"   - Why: {r['why'].strip()}",
@@ -341,10 +343,38 @@ def render_digest_md(result: dict, items_by_id: dict[str, dict]) -> str:
             ]
 
     # Write Org file too
+    org_content = "\n".join(org_lines) + "\n"
     with open("digest.org", "w", encoding="utf-8") as f:
-        f.write("\n".join(org_lines) + "\n")
+        f.write(org_content)
+    
+    sync_to_wiki(org_content)
 
     return "\n".join(lines)
+
+
+def sync_to_wiki(org_content: str):
+    if not os.path.exists(WIKI_PATH):
+        logger.warning(f"Wiki path {WIKI_PATH} not found. Skipping wiki sync.")
+        return
+
+    dest = os.path.join(WIKI_PATH, "digest.org")
+    with open(dest, "w", encoding="utf-8") as f:
+        f.write(org_content)
+    logger.info(f"Wrote {dest}")
+
+    # Git operations in the wiki repo
+    try:
+        subprocess.run(["git", "add", "digest.org"], cwd=WIKI_PATH, check=True)
+        # Check if there are changes to commit
+        status = subprocess.run(["git", "status", "--porcelain"], cwd=WIKI_PATH, capture_output=True, text=True)
+        if status.stdout.strip():
+            subprocess.run(["git", "commit", "-m", f"Update daily reads for {datetime.now().strftime('%Y-%m-%d')}"], cwd=WIKI_PATH, check=True)
+            subprocess.run(["git", "push"], cwd=WIKI_PATH, check=True)
+            logger.info("Committed and pushed to matiswiki")
+        else:
+            logger.info("No changes to commit in matiswiki")
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Git sync failed in matiswiki: {e}")
 
 
 def main():
