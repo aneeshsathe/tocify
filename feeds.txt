@@ -1,0 +1,27 @@
+# Academic & Research
+arXiv q-bio | http://export.arxiv.org/rss/q-bio
+arXiv cs.AI | http://export.arxiv.org/rss/cs.AI
+arXiv cs.LG | http://export.arxiv.org/rss/cs.LG
+arXiv stat.ML | http://export.arxiv.org/rss/stat.ML
+Biophysical Journal | https://www.cell.com/biophysj/inpress.rss
+Nature Machine Intelligence | https://www.nature.com/natmachintell.rss
+Nature Physics | https://www.nature.com/nphys.rss
+BioRxiv Biophysics | http://connect.biorxiv.org/biorxiv_xml.php?subject=biophysics
+Quanta Magazine | https://www.quantamagazine.org/feed/
+
+# Blogs & Thought Leaders
+Andrew Gelman (Stats) | https://statmodeling.stat.columbia.edu/feed/
+Lil'Log (Lilian Weng) | https://lilianweng.github.io/feed.xml
+Inference (Ferenc Huszár) | https://www.inference.vc/rss/
+Santa Fe Institute (Complexity) | https://www.santafe.edu/rss/news
+Google Research | http://feeds.feedburner.com/blogspot/gJZg
+OpenAI Blog | https://openai.com/blog/rss.xml
+Distill (Archive/Related) | https://distill.pub/rss.xml
+UCLA Causality Blog | http://causality.cs.ucla.edu/blog/feed/
+Machine Learning Mastery | https://machinelearningmastery.com/feed/
+Towards Data Science | https://towardsdatascience.com/feed
+Applying AI (Consumer AI) | https://blog.google/technology/ai/rss/
+One Useful Thing (Ethan Mollick) | https://www.oneusefulthing.org/feed
+Statisfaction | https://statisfying.wordpress.com/feed/
+Simon Willison | https://simonwillison.net/atom/entries/
+Ribbonfarm | https://www.ribbonfarm.com/feed/
