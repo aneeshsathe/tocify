@@ -25,3 +25,19 @@ One Useful Thing (Ethan Mollick) | https://www.oneusefulthing.org/feed
 Statisfaction | https://statisfying.wordpress.com/feed/
 Simon Willison | https://simonwillison.net/atom/entries/
 Ribbonfarm | https://www.ribbonfarm.com/feed/
+# From OPML Expansion
+Asimov Press | https://www.asimov.press/feed
+Nautilus | https://nautil.us/feed/
+Aeon | https://aeon.co/feed.rss
+Asterisk | https://asteriskmag.com/feed
+Symmetry Magazine | https://www.symmetrymagazine.org/feed
+The New Atlantis | https://www.thenewatlantis.com/feed
+NOEMA | https://www.noemamag.com/feed/
+The Point Magazine | https://thepointmag.com/feed/
+Arts & Letters Daily | https://www.aldaily.com/feed/
+Contraptions | https://contraptions.venkateshrao.com/feed
+Works in Progress | https://www.worksinprogress.news/feed
+Summer of Protocols | https://readwise.gg/guilds/rss/1082444651946049567
+Pluralistic | https://pluralistic.net/feed/
+The Marginalian | https://feeds.feedburner.com/brainpickings/rss
+Hedgehog Review | https://hedgehogreview.com/web-features/feed
